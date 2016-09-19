@@ -1,0 +1,6 @@
+c:\users\dave\documents\visual studio 2015\Projects\hellow world\hellow world\bin\Debug\hellow world.exe.config
+c:\users\dave\documents\visual studio 2015\Projects\hellow world\hellow world\bin\Debug\hellow world.exe
+c:\users\dave\documents\visual studio 2015\Projects\hellow world\hellow world\bin\Debug\hellow world.pdb
+c:\users\dave\documents\visual studio 2015\Projects\hellow world\hellow world\obj\Debug\hellow world.csprojResolveAssemblyReference.cache
+c:\users\dave\documents\visual studio 2015\Projects\hellow world\hellow world\obj\Debug\hellow world.exe
+c:\users\dave\documents\visual studio 2015\Projects\hellow world\hellow world\obj\Debug\hellow world.pdb
