@@ -17,7 +17,7 @@ namespace HellowWorld
             ScreenLines ScrLines = new ScreenLines();             
             Random RandNum = new Random();
             ScrLines.FirstLines();
-            for (;;) //бесконечный цикл, программа завершится только в случае команды "выход"        
+            while(0==0) //бесконечный цикл, программа завершится только в случае команды "выход"        
             {//при каждом прохождении цикла меняются исходные значения
                 num1 = RandNum.Next(1, 10);
                 num2 = RandNum.Next(1, 10);
