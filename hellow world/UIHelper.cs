@@ -61,11 +61,8 @@ namespace HellowWorld
         /// <returns></returns>
         public string GetUserAnswer()
         {
-            UIHelper uiHelper = new UIHelper();
             string input;
             input = Console.ReadLine();
-            if (input == "exit" || input == "Exit") //проверка на ввод команды "выход"
-                Environment.Exit(0);
             return input; 
         }
     }
