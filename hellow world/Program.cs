@@ -12,8 +12,8 @@ namespace HellowWorld
         
         static void Main(string[] args)
         {
-            var multiplicationCheck = new MultiplicationCheck();
-            multiplicationCheck.CyclePart();
+            var multiplicationTester = new MultiplicationTester();
+            multiplicationTester.StartTest();
             Console.ReadKey();
         }
     }

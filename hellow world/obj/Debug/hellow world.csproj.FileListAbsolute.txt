@@ -10,3 +10,9 @@ C:\Users\Dave\Documents\GitHub\Hellow-world\hellow world\obj\Debug\hellow world.
 C:\Users\Dave\Documents\GitHub\Hellow-world\hellow world\obj\Debug\hellow world.csprojResolveAssemblyReference.cache
 C:\Users\Dave\Documents\GitHub\Hellow-world\hellow world\bin\Debug\hellow world.exe
 C:\Users\Dave\Documents\GitHub\Hellow-world\hellow world\bin\Debug\hellow world.pdb
+C:\Users\Владелец\Documents\GitHub\Hellow-world\hellow world\bin\Debug\hellow world.exe.config
+C:\Users\Владелец\Documents\GitHub\Hellow-world\hellow world\obj\Debug\hellow world.exe
+C:\Users\Владелец\Documents\GitHub\Hellow-world\hellow world\obj\Debug\hellow world.pdb
+C:\Users\Владелец\Documents\GitHub\Hellow-world\hellow world\obj\Debug\hellow world.csprojResolveAssemblyReference.cache
+C:\Users\Владелец\Documents\GitHub\Hellow-world\hellow world\bin\Debug\hellow world.exe
+C:\Users\Владелец\Documents\GitHub\Hellow-world\hellow world\bin\Debug\hellow world.pdb

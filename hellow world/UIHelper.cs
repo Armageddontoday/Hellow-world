@@ -14,7 +14,8 @@ namespace HellowWorld
         public void ShowGreetingMessage()
         {
             Console.WriteLine("Hellow, User!");
-            Console.WriteLine("Type answer or \"Exit\" to exit");
+            Console.WriteLine("Type answer or \"Exit\" to exit.");
+            Console.WriteLine("Type \"Next\" for another task.");
             Console.WriteLine();
         }
         /// <summary>
@@ -25,8 +26,8 @@ namespace HellowWorld
             Console.Clear();
             ShowGreetingMessage();
             Console.WriteLine("Input rror!");
-            Console.WriteLine("You have to enter number or \"Exit\" command");
-            Console.WriteLine("Let's try another one:");
+            Console.WriteLine("You have to enter number or use \"Exit\" / \"Next\" command.");
+            Console.WriteLine("Let's try again:");
         }
         /// <summary>
         /// Набор строк о правильном ответе. Очищает экран, выводит первые строки. 
@@ -38,7 +39,7 @@ namespace HellowWorld
             ShowGreetingMessage();
             Console.WriteLine("{0} * {1} = {2}!", x, y, z);
             Console.WriteLine("Correct!");
-            Console.WriteLine("Lets play again!");
+            Console.WriteLine("Lets play another one!");
             Console.WriteLine();
         }
         /// <summary>
@@ -55,15 +56,8 @@ namespace HellowWorld
         }
         /// <summary>
         /// запрос на ввод пользователем ответа, ответ в формате строки проверяется 
-        /// на соответствие команде "Выход", при совпадении программа завершается.
-        /// Если не была введён "выход", метод возвращает значение переменной в основную часть кода.
         /// </summary>
-        /// <returns></returns>
         public string GetUserAnswer()
-        {
-            string input;
-            input = Console.ReadLine();
-            return input; 
-        }
+        {return Console.ReadLine();}
     }
 }
