@@ -59,5 +59,12 @@ namespace HellowWorld
         /// </summary>
         public string GetUserAnswer()
         {return Console.ReadLine();}
+        /// <summary>
+        /// вывод на экран  текущего задания
+        /// </summary>
+        public void ShowCurrentTask(int x, int y)
+        {
+            Console.WriteLine("{0} * {1}= ", x, y);
+        }
     }
 }
