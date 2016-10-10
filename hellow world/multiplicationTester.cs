@@ -17,9 +17,8 @@ namespace HellowWorld
         private Random randNum = new Random();
         private string userInput;
         /// <summary>
-        ///   показывает приветственное сообщеие и затем уходит в бесконечный цикл выполнения программы
+        ///   показывает приветственное сообщеие и затем уходит в бесконечный цикл выполнения программы         
         /// </summary>
-
         public void StartTest()
         {
             
@@ -27,45 +26,18 @@ namespace HellowWorld
             RandomizeCurrentNums();
             uiHelper.ShowCurrentTask(num1, num2);
             while (true) //бесконечный цикл, программа завершится только в случае команды "выход"        
-            {//при каждом прохождении цикла меняются исходные значения
-
-                
-                while (true) //цикл, в ходе которого вводится ответ пользователя в формате строки, идёт проверка на команды и возможность его преобразования в число
-                {
-                    userInput = uiHelper.GetUserAnswer();//запрос ответа
-                    CheckCommand(userInput);//проверка на возможный ввод команд и их последующее выполнение
-                    if (StringToIntConvertionPossibility(userInput) == false) //проверка на возможность преобразования строки в число, при невозможности- сообщение об ошибке и повторный запрос
-                    {
-                        uiHelper.ShowGreetingMessage();
-                        uiHelper.ShowErrorMessage();
-                        uiHelper.ShowCurrentTask(num1, num2);
-                        continue;
-                    }
-                    else //в случае возможного корректного преобразования - выход из цикла запросов и проверка ответа на правильность
-                        break;  
-                 }
-                numResult= int.Parse(userInput);
-                if (CheckAnswer(numResult) == true)
-                {
-                    uiHelper.ShowGreetingMessage();
-                    uiHelper.ShowCorrectAnswer(num1, num2, numResult);
-                    RandomizeCurrentNums();
-                    uiHelper.ShowCurrentTask(num1, num2);
-                }
-                else
-                {
-                    uiHelper.ShowWrongAnswer(num1, num2, numResult);
-                    uiHelper.ShowCurrentTask(num1, num2);
-                    //uiHelper.ShowCurrentTask(num1, num2);//в случае неправильного ответа покаывается сообщение и запрашивается повторный ввод при тех же исходных num1 и num2
-                }
-                  }
+            {//при каждом полном прохождении цикла меняются исходные значения
+                GetUserInput();
+                numResult = int.Parse(userInput);
+                CheckAnswer();
+            }
         }
         
         /// <summary>
         /// проверка введённой пользователем строки на соответствие командам
         /// </summary>
         /// <param name="userInput"></param>
-        private void CheckCommand(string userInput)
+        private void CheckCommand()
         {
             if (userInput == "exit" || userInput == "Exit") //проверка на ввод команды "выход"
                 Environment.Exit(0);
@@ -97,12 +69,20 @@ namespace HellowWorld
         /// <summary>
         /// проверка ответа на правильность 
         /// </summary>
-        private bool CheckAnswer(int userAnswer)
+        private void CheckAnswer()
         {
-            if (userAnswer == num1 * num2)
-            {return true;}
+            if (numResult == num1 * num2)
+            {
+                uiHelper.ShowGreetingMessage();
+                uiHelper.ShowCorrectAnswer(num1, num2, numResult);
+                RandomizeCurrentNums();
+                uiHelper.ShowCurrentTask(num1, num2);
+            }
             else
-            {return false;}
+            {
+                uiHelper.ShowWrongAnswer(num1, num2, numResult);
+                uiHelper.ShowCurrentTask(num1, num2);
+            }
         }
         /// <summary>
         /// метод рандомизирующий значение исходных данных
@@ -111,6 +91,29 @@ namespace HellowWorld
         {
             num1 = randNum.Next(1, 10);
             num2 = randNum.Next(1, 10);
+        }
+        /// <summary>
+        /// цикл, в ходе которого вводится ответ пользователя в формате строки, идёт проверка на команды и возможность его преобразования в число
+        /// </summary>
+        private void GetUserInput()
+        {
+            while (true) 
+            {
+                userInput = uiHelper.GetUserAnswer();//запрос ответа
+                CheckCommand();//проверка на возможный ввод команд и их последующее выполнение
+                if (StringToIntConvertionPossibility(userInput) == false) //проверка на возможность преобразования строки в число, при невозможности- сообщение об ошибке и повторный запрос
+                {
+                    uiHelper.ShowGreetingMessage();
+                    uiHelper.ShowErrorMessage();
+                    uiHelper.ShowCurrentTask(num1, num2);
+                    continue;
+                }
+                else //в случае возможного корректного преобразования - выход из цикла запросов и проверка ответа на правильность
+                {
+                    break;
+                   
+                }
+            }
         }
 
     }
