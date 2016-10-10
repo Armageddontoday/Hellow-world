@@ -13,6 +13,7 @@ namespace HellowWorld
         /// </summary>
         public void ShowGreetingMessage()
         {
+            Console.Clear();
             Console.WriteLine("Hellow, User!");
             Console.WriteLine("Type answer or \"Exit\" to exit.");
             Console.WriteLine("Type \"Next\" for another task.");
@@ -25,9 +26,9 @@ namespace HellowWorld
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("Input rror!");
+            Console.WriteLine("Input error!");
             Console.WriteLine("You have to enter number or use \"Exit\" / \"Next\" command.");
-            Console.WriteLine("Let's try again:");
+            Console.WriteLine("Let's try again:");            
         }
         /// <summary>
         /// Набор строк о правильном ответе. Очищает экран, выводит первые строки. 
@@ -64,7 +65,11 @@ namespace HellowWorld
         /// </summary>
         public void ShowCurrentTask(int x, int y)
         {
-            Console.WriteLine("{0} * {1}= ", x, y);
+            Console.Write("{0} * {1}= ", x, y);
         }
+        /// <summary>
+        /// очищение экрана
+        /// </summary>
+      
     }
 }
