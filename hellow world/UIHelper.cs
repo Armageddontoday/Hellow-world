@@ -28,17 +28,18 @@ namespace HellowWorld
             ShowGreetingMessage();
             Console.WriteLine("Input error!");
             Console.WriteLine("You have to enter number or use \"Exit\" / \"Next\" command.");
-            Console.WriteLine("Let's try again:");            
+            Console.WriteLine("Let's try again:");
+            Console.WriteLine();
         }
         /// <summary>
         /// Набор строк о правильном ответе. Очищает экран, выводит первые строки. 
         /// Показывает выражение и введённый ответ, выдает сообщение об успехе.
         /// </summary>
-        public void ShowCorrectAnswer(int x, int y, int z)
+        public void ShowCorrectAnswer(Task task)
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} * {1} = {2}!", x, y, z);
+            Console.WriteLine("{0} * {1} = {2}!", task.op1, task.op2, task.op1* task.op2);
             Console.WriteLine("Correct!");
             Console.WriteLine("Lets play another one!");
             Console.WriteLine();
@@ -46,30 +47,29 @@ namespace HellowWorld
         /// <summary>
         /// Аналогично ShowCorrectAnswer, но выдаёт сообщение об ошибочном ответе
         /// </summary>
-        public void ShowWrongAnswer(int x, int y, int z)
+        public void ShowWrongAnswer(Task task, int answer)
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} * {1} isn't = {2}!", x, y, z);
+            Console.WriteLine("{0} * {1} isn't = {2}!", task.op1, task.op2, answer);
             Console.WriteLine("Your answer is incorrect!");
             Console.WriteLine("Try again:");
             Console.WriteLine();
+            ShowCurrentTask(task);
         }
         /// <summary>
         /// запрос на ввод пользователем ответа, ответ в формате строки проверяется 
         /// </summary>
         public string GetUserAnswer()
-        {return Console.ReadLine();}
+        {
+            return Console.ReadLine();
+        }
         /// <summary>
         /// вывод на экран  текущего задания
         /// </summary>
-        public void ShowCurrentTask(int x, int y)
+        public void ShowCurrentTask(Task task)
         {
-            Console.Write("{0} * {1}= ", x, y);
-        }
-        /// <summary>
-        /// очищение экрана
-        /// </summary>
-      
+            Console.Write("{0} * {1}= ", task.op1, task.op2);
+        }       
     }
 }

@@ -13,8 +13,7 @@ namespace HellowWorld
         static void Main(string[] args)
         {
             var multiplicationTester = new MultiplicationTester();
-            multiplicationTester.StartTest();
-            Console.ReadKey();
+            multiplicationTester.StartTest();            
         }
     }
 }
