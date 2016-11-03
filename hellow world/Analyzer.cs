@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace HellowWorld
 {
-    class UserInputAnalyzer
+    class Analyzer
     {
-        public bool UserInputIsNext(string userInput)
+        public bool IsNext(string userInput)
         {
             if (userInput == "Next" || userInput == "next")
                 return true;
             return false;
         }
-        public bool UserInputIsExit(string userInput)
+        public bool IsExit(string userInput)
         {
             if (userInput == "Exit" || userInput == "exit")
                 return true;
             return false;
         }
-        public bool UserInputIsNumber(string userInput)
+        public bool IsNumber(string userInput)
         {
             try
             {
@@ -32,9 +32,9 @@ namespace HellowWorld
                 return false;
             }
         }
-        public bool UserInputIsCorrectAnswer(Task task, string userInput)
+        public bool IsCorrectAnswer(Task task, string userInput)
         {
-            if (int.Parse(userInput) == task.op1 * task.op2)
+            if (int.Parse(userInput) == task.num1 * task.num2)
                 return true;
             return false;
         }

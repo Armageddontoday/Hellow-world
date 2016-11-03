@@ -14,18 +14,18 @@ namespace HellowWorld
        
         public int StartTest()
         {
-            var status = RoundStatuses.initial;
+            var status = RoundStatuses.Initial;
             while (true) 
             {                     
                 var newTask =  PrepareNewTask();                
                 status = StartTestRound(newTask, status);
-                if (status == RoundStatuses.next)
+                if (status == RoundStatuses.Next)
                     continue; //при "next"- новая итерация
-                if (status == RoundStatuses.exit)
+                if (status == RoundStatuses.Exit)
                 {
                     return 1;
                 }
-                if (status == RoundStatuses.correctAnswer)
+                if (status == RoundStatuses.CorrectAnswer)
                 {
                     uiHelper.ShowCorrectAnswer(newTask);                    
                     continue;
@@ -34,16 +34,16 @@ namespace HellowWorld
         }        
         private enum RoundStatuses //
         {
-            initial,                        
-            next,
-            correctAnswer,
-            exit
+            Initial,                        
+            Next,
+            CorrectAnswer,
+            Exit
         }
 
         private RoundStatuses StartTestRound(Task task, RoundStatuses status)
         {
-            var userInputAnalyzer = new UserInputAnalyzer();                       
-            if (status !=RoundStatuses.correctAnswer)
+            var analyzer = new Analyzer();                       
+            if (status !=RoundStatuses.CorrectAnswer)
             {
                 
                 uiHelper.ShowGreetingMessage();
@@ -54,19 +54,19 @@ namespace HellowWorld
             while (true)
             {    
                 string userInput = uiHelper.GetUserAnswer();//запрос ответа
-                if (userInputAnalyzer.UserInputIsExit(userInput))//проверка на команду выход
+                if (analyzer.IsExit(userInput))//проверка на команду выход
                 {
-                    return RoundStatuses.exit;
+                    return RoundStatuses.Exit;
                 }
-                if (userInputAnalyzer.UserInputIsNext(userInput))//проверка на команду следующего варианта
+                if (analyzer.IsNext(userInput))//проверка на команду следующего варианта
                 {
-                    return RoundStatuses.next;
+                    return RoundStatuses.Next;
                 }
-                if (userInputAnalyzer.UserInputIsNumber(userInput))//проверка введено ли число
+                if (analyzer.IsNumber(userInput))//проверка введено ли число
                 {
-                    if (userInputAnalyzer.UserInputIsCorrectAnswer(task, userInput))//если да, то правильный ли ответ
+                    if (analyzer.IsCorrectAnswer(task, userInput))//если да, то правильный ли ответ
                     {                         
-                        return RoundStatuses.correctAnswer;
+                        return RoundStatuses.CorrectAnswer;
                         //при правильном ответе нужны новые значение Task, поэтому  используется
                         //тот же механизм, что и при  команде Next, только в данном случае 
                         //выводится сообщение о успехе 

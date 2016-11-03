@@ -8,12 +8,12 @@ namespace HellowWorld
 {
     public class Task
     {
-        public int op1 { get; private set; }
-        public int op2 { get; private set; }
+        public int num1 { get; private set; }
+        public int num2 { get; private set; }
         public Task(int oper1, int oper2)
         {
-            op1 = oper1;
-            op2 = oper2;
+            num1 = oper1;
+            num2 = oper2;
         }
     }
 }

@@ -39,7 +39,7 @@ namespace HellowWorld
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} * {1} = {2}!", task.op1, task.op2, task.op1* task.op2);
+            Console.WriteLine("{0} * {1} = {2}!", task.num1, task.num2, task.num1* task.num2);
             Console.WriteLine("Correct!");
             Console.WriteLine("Lets play another one!");
             Console.WriteLine();
@@ -51,7 +51,7 @@ namespace HellowWorld
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} * {1} isn't = {2}!", task.op1, task.op2, answer);
+            Console.WriteLine("{0} * {1} isn't = {2}!", task.num1, task.num2, answer);
             Console.WriteLine("Your answer is incorrect!");
             Console.WriteLine("Try again:");
             Console.WriteLine();
