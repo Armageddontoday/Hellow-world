@@ -34,7 +34,7 @@ namespace HellowWorld
         }
         public bool IsCorrectAnswer(Task task, string userInput)
         {
-            if (int.Parse(userInput) == task.num1 * task.num2)
+            if (int.Parse(userInput) == task.operand1 * task.operand2)
                 return true;
             return false;
         }

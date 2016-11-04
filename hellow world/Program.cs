@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace HellowWorld
 {
     class Program
-    {
-        
+    {        
         static void Main(string[] args)
         {
             var multiplicationTester = new MultiplicationTester();

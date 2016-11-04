@@ -14,46 +14,43 @@ namespace HellowWorld
        
         public int StartTest()
         {
+            Task newTask;
+            Task previousTask=null;
             var status = RoundStatuses.Initial;
             while (true) 
             {                     
-                var newTask =  PrepareNewTask();                
-                status = StartTestRound(newTask, status);
+                newTask =  PrepareNewTask();                
+                status = StartTestRound(newTask, previousTask, status);
                 if (status == RoundStatuses.Next)
                     continue; //при "next"- новая итерация
                 if (status == RoundStatuses.Exit)
                 {
                     return 1;
                 }
-                if (status == RoundStatuses.CorrectAnswer)
+                if (status==RoundStatuses.CorrectAnswer)
                 {
-                    uiHelper.ShowCorrectAnswer(newTask);                    
-                    continue;
+                    previousTask = newTask;
                 }
             }           
         }        
-        private enum RoundStatuses //
+        public enum RoundStatuses //
         {
             Initial,                        
             Next,
-            CorrectAnswer,
+            CorrectAnswer,            
+            InCorrectAnswer,
+            InvalidInput,
             Exit
         }
 
-        private RoundStatuses StartTestRound(Task task, RoundStatuses status)
+        private RoundStatuses StartTestRound(Task task, Task previousTask, RoundStatuses status)
         {
-            var analyzer = new Analyzer();                       
-            if (status !=RoundStatuses.CorrectAnswer)
-            {
-                
-                uiHelper.ShowGreetingMessage();
-                uiHelper.ShowCurrentTask(task);
-            }
-            else
-                uiHelper.ShowCurrentTask(task);
+            var analyzer = new Analyzer();
+            string userInput = "";
             while (true)
-            {    
-                string userInput = uiHelper.GetUserAnswer();//запрос ответа
+            {
+                uiHelper.ShowMessage(task, previousTask, status, userInput);
+                userInput = uiHelper.GetUserAnswer();//запрос ответа
                 if (analyzer.IsExit(userInput))//проверка на команду выход
                 {
                     return RoundStatuses.Exit;
@@ -65,22 +62,22 @@ namespace HellowWorld
                 if (analyzer.IsNumber(userInput))//проверка введено ли число
                 {
                     if (analyzer.IsCorrectAnswer(task, userInput))//если да, то правильный ли ответ
-                    {                         
-                        return RoundStatuses.CorrectAnswer;
+                    {                        
+                            return RoundStatuses.CorrectAnswer;
+                        
                         //при правильном ответе нужны новые значение Task, поэтому  используется
                         //тот же механизм, что и при  команде Next, только в данном случае 
                         //выводится сообщение о успехе 
                     }
                     else
                     {
-                        uiHelper.ShowWrongAnswer(task, int.Parse(userInput));
+                        status=RoundStatuses.InCorrectAnswer;                        
                         continue;
                     }
                 }
                 else
                 {
-                    uiHelper.ShowErrorMessage();
-                    uiHelper.ShowCurrentTask(task);
+                    status = RoundStatuses.InvalidInput;
                     continue;
                 }
                 

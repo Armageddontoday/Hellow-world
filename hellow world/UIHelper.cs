@@ -8,6 +8,35 @@ namespace HellowWorld
 {
     class UIHelper
     {
+        public void ShowMessage(Task task, Task previousTask, MultiplicationTester.RoundStatuses status, string userAnswer)
+        {
+            switch (status)
+            {
+                case MultiplicationTester.RoundStatuses.Initial:
+                    ShowGreetingMessage();
+                    ShowCurrentTask(task);
+                    break;
+                case MultiplicationTester.RoundStatuses.CorrectAnswer:                    
+                    ShowNewCorrectAnswer(previousTask);
+                    ShowCurrentTask(task);
+                    break;
+                case MultiplicationTester.RoundStatuses.InCorrectAnswer:
+                    ShowGreetingMessage();
+                    ShowWrongAnswer(task, int.Parse(userAnswer));
+                    ShowCurrentTask(task);
+                    break;
+                case MultiplicationTester.RoundStatuses.Next:
+                    ShowGreetingMessage();
+                    ShowCurrentTask(task);
+                    break;
+                case MultiplicationTester.RoundStatuses.InvalidInput:
+                    ShowGreetingMessage();
+                    ShowErrorMessage();
+                    ShowCurrentTask(task);
+                    break; 
+
+            }
+        }
         /// <summary>
         /// Набор строк, которые висят в верхней части экрана
         /// </summary>
@@ -35,11 +64,11 @@ namespace HellowWorld
         /// Набор строк о правильном ответе. Очищает экран, выводит первые строки. 
         /// Показывает выражение и введённый ответ, выдает сообщение об успехе.
         /// </summary>
-        public void ShowCorrectAnswer(Task task)
+        public void ShowNewCorrectAnswer(Task task)
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} * {1} = {2}!", task.num1, task.num2, task.num1* task.num2);
+            Console.WriteLine("{0} * {1} = {2}!", task.operand1, task.operand2, task.operand1 * task.operand2);
             Console.WriteLine("Correct!");
             Console.WriteLine("Lets play another one!");
             Console.WriteLine();
@@ -51,11 +80,10 @@ namespace HellowWorld
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} * {1} isn't = {2}!", task.num1, task.num2, answer);
+            Console.WriteLine("{0} * {1} isn't = {2}!", task.operand1, task.operand2, answer);
             Console.WriteLine("Your answer is incorrect!");
             Console.WriteLine("Try again:");
-            Console.WriteLine();
-            ShowCurrentTask(task);
+            Console.WriteLine();            
         }
         /// <summary>
         /// запрос на ввод пользователем ответа, ответ в формате строки проверяется 
@@ -69,7 +97,13 @@ namespace HellowWorld
         /// </summary>
         public void ShowCurrentTask(Task task)
         {
-            Console.Write("{0} * {1}= ", task.op1, task.op2);
-        }       
+            Console.Write("{0} * {1}= ", task.operand1, task.operand2);
+        }
+        public void ShowCorrectAnswer()
+        {            
+            Console.WriteLine("Correct!");
+            Console.WriteLine("Lets play another one!");
+            Console.WriteLine();
+        }
     }
 }
