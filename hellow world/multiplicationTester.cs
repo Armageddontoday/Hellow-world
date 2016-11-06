@@ -14,23 +14,22 @@ namespace HellowWorld
        
         public int StartTest()
         {
-            Task newTask;
-            Task previousTask=null;
+            Task newTask = null;            
             var status = RoundStatuses.Initial;
+
             while (true) 
-            {                     
-                newTask =  PrepareNewTask();                
-                status = StartTestRound(newTask, previousTask, status);
+            {
+                if (status == RoundStatuses.Initial)
+                    newTask = PrepareNewTask(0,0);
+                else
+                    newTask =  PrepareNewTask(newTask.operand1, newTask.operand2);                
+                status = StartTestRound(newTask, status);
                 if (status == RoundStatuses.Next)
                     continue; //при "next"- новая итерация
                 if (status == RoundStatuses.Exit)
                 {
                     return 1;
-                }
-                if (status==RoundStatuses.CorrectAnswer)
-                {
-                    previousTask = newTask;
-                }
+                }               
             }           
         }        
         public enum RoundStatuses //
@@ -38,18 +37,18 @@ namespace HellowWorld
             Initial,                        
             Next,
             CorrectAnswer,            
-            InCorrectAnswer,
+            IncorrectAnswer,
             InvalidInput,
             Exit
         }
 
-        private RoundStatuses StartTestRound(Task task, Task previousTask, RoundStatuses status)
+        private RoundStatuses StartTestRound(Task task, RoundStatuses status)
         {
-            var analyzer = new Analyzer();
-            string userInput = "";
+            var analyzer = new UserInputAnalyzer();
+            string userInput = null;
             while (true)
             {
-                uiHelper.ShowMessage(task, previousTask, status, userInput);
+                uiHelper.ShowMessage(task, status, userInput);
                 userInput = uiHelper.GetUserAnswer();//запрос ответа
                 if (analyzer.IsExit(userInput))//проверка на команду выход
                 {
@@ -63,6 +62,7 @@ namespace HellowWorld
                 {
                     if (analyzer.IsCorrectAnswer(task, userInput))//если да, то правильный ли ответ
                     {                        
+                            
                             return RoundStatuses.CorrectAnswer;
                         
                         //при правильном ответе нужны новые значение Task, поэтому  используется
@@ -71,7 +71,7 @@ namespace HellowWorld
                     }
                     else
                     {
-                        status=RoundStatuses.InCorrectAnswer;                        
+                        status=RoundStatuses.IncorrectAnswer;                        
                         continue;
                     }
                 }
@@ -84,14 +84,14 @@ namespace HellowWorld
             }       
 
         }
-        
-             
-        private Task PrepareNewTask()
+
+
+        private Task PrepareNewTask(int previousOperand1, int previousOperand2)
         {
-            var rand = new Random();
-            int num1 = rand.Next(1, 10);
-            int num2 = rand.Next(1, 10);            
-            return new Task(num1, num2);
+            var rand = new Random();           
+            int operand1 = rand.Next(1, 10);
+            int operand2 = rand.Next(1, 10);
+            return new Task(operand1, operand2, previousOperand1, previousOperand2);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HellowWorld
 {
-    class Analyzer
+    class UserInputAnalyzer
     {
         public bool IsNext(string userInput)
         {
