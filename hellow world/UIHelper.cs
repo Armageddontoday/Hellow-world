@@ -68,7 +68,7 @@ namespace HellowWorld
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} * {1} = {2}!", task.previousOperand1, task.previousOperand2, task.previousOperand1 * task.previousOperand2);
+            Console.WriteLine("{0} * {1} = {2}!", task.PreviousOperand1, task.PreviousOperand2, task.PreviousOperand1 * task.PreviousOperand2);
             Console.WriteLine("Correct!");
             Console.WriteLine("Lets play another one!");
             Console.WriteLine();
@@ -80,7 +80,7 @@ namespace HellowWorld
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} * {1} isn't = {2}!", task.operand1, task.operand2, answer);
+            Console.WriteLine("{0} * {1} isn't = {2}!", task.Operand1, task.Operand2, answer);
             Console.WriteLine("Your answer is incorrect!");
             Console.WriteLine("Try again:");
             Console.WriteLine();            
@@ -97,7 +97,7 @@ namespace HellowWorld
         /// </summary>
         public void ShowCurrentTask(Task task)
         {
-            Console.Write("{0} * {1}= ", task.operand1, task.operand2);
+            Console.Write("{0} * {1}= ", task.Operand1, task.Operand2);
         }
     }
 }

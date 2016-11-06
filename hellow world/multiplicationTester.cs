@@ -14,16 +14,16 @@ namespace HellowWorld
        
         public int StartTest()
         {
-            Task newTask = null;            
+            Task currentTask = null;            
             var status = RoundStatuses.Initial;
 
             while (true) 
             {
                 if (status == RoundStatuses.Initial)
-                    newTask = PrepareNewTask(0,0);
+                    currentTask = PrepareNewTask(0,0);
                 else
-                    newTask =  PrepareNewTask(newTask.operand1, newTask.operand2);                
-                status = StartTestRound(newTask, status);
+                    currentTask =  PrepareNewTask(currentTask.Operand1, currentTask.Operand2);                
+                status = StartTestRound(currentTask, status);
                 if (status == RoundStatuses.Next)
                     continue; //при "next"- новая итерация
                 if (status == RoundStatuses.Exit)
