@@ -6,6 +6,23 @@ using System.Threading.Tasks;
 
 namespace HellowWorld
 {
+    public enum RoundStatuses //
+    {
+        Initial,
+        Next,
+        CorrectAnswer,
+        IncorrectAnswer,
+        InvalidInput,
+        Exit
+    }
+    public enum MathOperation
+    {
+        Add,
+        Substract,
+        Multiplicate,
+        Divide,
+        Degree
+    }
 
     class MultiplicationTester
     {
@@ -16,11 +33,12 @@ namespace HellowWorld
         {
             Task currentTask = null;            
             var status = RoundStatuses.Initial;
-
+            MathOperation CurrentMathOpreation;
             while (true) 
-            {                
+            {
+                CurrentMathOpreation=RandomMathOperation();
                 currentTask =  PrepareNewTask(currentTask);                
-                status = StartTestRound(currentTask, status);
+                status = StartTestRound(currentTask, CurrentMathOpreation, status);
                 if (status == RoundStatuses.Next)
                     continue; //при "next"- новая итерация
                 if (status == RoundStatuses.Exit)
@@ -29,20 +47,13 @@ namespace HellowWorld
                 }               
             }           
         }        
-        public enum RoundStatuses //
-        {
-            Initial,                        
-            Next,
-            CorrectAnswer,            
-            IncorrectAnswer,
-            InvalidInput,
-            Exit
-        }
+        
 
-        private RoundStatuses StartTestRound(Task task, RoundStatuses status)
+        private RoundStatuses StartTestRound(Task task, MathOperation CurrentMathOpreation, RoundStatuses status)
         {
             var userInputAnalyzer = new UserInputAnalyzer();
             string userInput = null;
+            
             while (true)
             {
                 uiHelper.ShowMessage(task, status, userInput);
@@ -83,7 +94,26 @@ namespace HellowWorld
             var rand = new Random();           
             int operand1 = rand.Next(1, 10);
             int operand2 = rand.Next(1, 10);
-            return new Task(operand1, operand2, previousTask);
+            return new Task(operand1, operand2, RandomMathOperation(), previousTask);
+        }
+        private MathOperation RandomMathOperation()
+        {
+            var rand = new Random();
+            int mathOperationNumber = rand.Next(1, 6);
+            switch(mathOperationNumber)
+            {
+                case 1:
+                    return MathOperation.Add;                    
+                case 2:
+                    return MathOperation.Substract;                    
+                case 3:
+                    return MathOperation.Multiplicate;
+                case 4:
+                    return MathOperation.Divide;
+                case 5:
+                    return MathOperation.Degree;
+            }
+            return 0;
         }
     }
 }
