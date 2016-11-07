@@ -68,7 +68,7 @@ namespace HellowWorld
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} * {1} = {2}!", task.PreviousOperand1, task.PreviousOperand2, task.PreviousOperand1 * task.PreviousOperand2);
+            Console.WriteLine("{0} * {1} = {2}!", task.PreviousTask.Operand1, task.PreviousTask.Operand2, task.PreviousTask.Operand1 * task.PreviousTask.Operand2);
             Console.WriteLine("Correct!");
             Console.WriteLine("Lets play another one!");
             Console.WriteLine();

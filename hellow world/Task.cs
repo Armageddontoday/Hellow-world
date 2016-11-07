@@ -8,16 +8,14 @@ namespace HellowWorld
 {
     public class Task
     {
+        public Task PreviousTask { get; private set; }
         public int Operand1 { get; private set; }
         public int Operand2 { get; private set; }
-        public int PreviousOperand1 { get; private set; }
-        public int PreviousOperand2 { get; private set; }       
-        public Task(int operand1, int operand2,int previousOperand1, int previousOperand2)
-        {
-            PreviousOperand1 = previousOperand1;
-            PreviousOperand2 = previousOperand2;
+        public Task(int operand1, int operand2, Task previousTask)
+        {           
             Operand1 = operand1;
-            Operand2 = operand2;                       
+            Operand2 = operand2;
+            PreviousTask = previousTask;
         }       
     }
 }
