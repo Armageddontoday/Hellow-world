@@ -15,7 +15,7 @@ namespace HellowWorld
         InvalidInput,
         Exit
     }
-    public enum MathOperation
+    public enum MathOperations
     {
         Add,
         Substract,
@@ -32,13 +32,11 @@ namespace HellowWorld
         public int StartTest()
         {
             Task currentTask = null;            
-            var status = RoundStatuses.Initial;
-            MathOperation CurrentMathOpreation;
+            var status = RoundStatuses.Initial;           
             while (true) 
             {
-                CurrentMathOpreation=RandomMathOperation();
                 currentTask =  PrepareNewTask(currentTask);                
-                status = StartTestRound(currentTask, CurrentMathOpreation, status);
+                status = StartTestRound(currentTask,  status);
                 if (status == RoundStatuses.Next)
                     continue; //при "next"- новая итерация
                 if (status == RoundStatuses.Exit)
@@ -49,7 +47,7 @@ namespace HellowWorld
         }        
         
 
-        private RoundStatuses StartTestRound(Task task, MathOperation CurrentMathOpreation, RoundStatuses status)
+        private RoundStatuses StartTestRound(Task task, RoundStatuses status)
         {
             var userInputAnalyzer = new UserInputAnalyzer();
             string userInput = null;
@@ -96,22 +94,22 @@ namespace HellowWorld
             int operand2 = rand.Next(1, 10);
             return new Task(operand1, operand2, RandomMathOperation(), previousTask);
         }
-        private MathOperation RandomMathOperation()
+        private MathOperations RandomMathOperation()
         {
             var rand = new Random();
             int mathOperationNumber = rand.Next(1, 6);
             switch(mathOperationNumber)
             {
                 case 1:
-                    return MathOperation.Add;                    
+                    return MathOperations.Add;                    
                 case 2:
-                    return MathOperation.Substract;                    
+                    return MathOperations.Substract;                    
                 case 3:
-                    return MathOperation.Multiplicate;
+                    return MathOperations.Multiplicate;
                 case 4:
-                    return MathOperation.Divide;
+                    return MathOperations.Divide;
                 case 5:
-                    return MathOperation.Degree;
+                    return MathOperations.Degree;
             }
             return 0;
         }
