@@ -18,15 +18,17 @@ namespace HellowWorld
             Operand1 = operand1;
             Operand2 = operand2;            
             MathOperation = mathOperation;
-            CorrectAnswer = CurrentCorrectAnswer(Operand1, Operand2, MathOperation);
+            CorrectAnswer = GetCorrectAnswer(Operand1, Operand2, MathOperation);
             PreviousTask = previousTask;
         }
         /// <summary>
         /// возващает правильный ответ на текущее задание
         /// для дробей в случае деления округление до сотых
         /// </summary>        
-        private double CurrentCorrectAnswer(int operand1, int operand2, MathOperations MathOperation)
-        {   
+         
+        private double GetCorrectAnswer(int operand1, int operand2, MathOperations MathOperation)
+        {
+           
             switch (MathOperation)
             {
                 case MathOperations.Add:
@@ -45,3 +47,4 @@ namespace HellowWorld
         }       
     }
 }
+

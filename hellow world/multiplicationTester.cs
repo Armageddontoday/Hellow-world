@@ -36,9 +36,7 @@ namespace HellowWorld
             while (true) 
             {
                 currentTask =  PrepareNewTask(currentTask);                
-                status = StartTestRound(currentTask,  status);
-                if (status == RoundStatuses.Next)
-                    continue; //при "next"- новая итерация
+                status = StartTestRound(currentTask,  status);                
                 if (status == RoundStatuses.Exit)
                 {
                     return 1;
@@ -71,11 +69,7 @@ namespace HellowWorld
                 }
                 if (userInputAnalyzer.IsCorrectAnswer(task, userInput))//если да, то правильный ли ответ
                 {
-                    return RoundStatuses.CorrectAnswer;
-                        
-                        //при правильном ответе нужны новые значение Task, поэтому  используется
-                        //тот же механизм, что и при  команде Next, только в данном случае 
-                        //выводится сообщение о успехе 
+                    return RoundStatuses.CorrectAnswer;   
                 }
                 else
                 {
@@ -90,9 +84,9 @@ namespace HellowWorld
         private Task PrepareNewTask(Task previousTask)
         {
             var random = new Random();                       
-            return new Task(random.Next(1, 10), random.Next(1, 10), RandomMathOperation(), previousTask);
+            return new Task(random.Next(1, 10), random.Next(1, 10), GetRandomMathOperation(), previousTask);
         }
-        private MathOperations RandomMathOperation()
+        private MathOperations GetRandomMathOperation()
         {
             var rand = new Random();
             int mathOperationNumber = rand.Next(1, 6);

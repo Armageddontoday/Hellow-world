@@ -22,7 +22,7 @@ namespace HellowWorld
                     break;
                 case RoundStatuses.IncorrectAnswer:
                     ShowGreetingMessage();
-                    ShowWrongAnswer(task, int.Parse(userAnswer));
+                    ShowWrongAnswer(task, double.Parse(userAnswer));
                     ShowCurrentTask(task);
                     break;
                 case RoundStatuses.Next:
@@ -77,7 +77,7 @@ namespace HellowWorld
         /// <summary>
         /// Аналогично ShowCorrectAnswer, но выдаёт сообщение об ошибочном ответе
         /// </summary>
-        public void ShowWrongAnswer(Task task, int answer)
+        public void ShowWrongAnswer(Task task, double answer)
         {
             Console.Clear();
             ShowGreetingMessage();
@@ -100,9 +100,12 @@ namespace HellowWorld
         {
             Console.Write("{0} {2} {1}= ", task.Operand1, task.Operand2, GetMathOperationChar(task.MathOperation));
         }
+        /// <summary>
+        /// возвращает символ текущей операции для UIHelper'a
+        /// </summary>
 
         private char GetMathOperationChar(MathOperations mathOperation)
-        {//возвращает символ текущей операции для UIHelper'a
+        {
             switch (mathOperation)
             {
                 case MathOperations.Add:
