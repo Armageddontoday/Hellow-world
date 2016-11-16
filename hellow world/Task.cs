@@ -8,10 +8,10 @@ namespace HellowWorld
 {
     public class Task
     {        
-        public int Operand1 { get; private set; }//два текущих операнда
+        public int Operand1 { get; private set; }
         public int Operand2 { get; private set; }        
-        public MathOperations MathOperation;//текущая операция        
-        public double CorrectAnswer;//правильный ответ на текущее задание
+        public MathOperations MathOperation;      
+        public double CorrectAnswer;
         public Task PreviousTask { get; private set; }
         public Task(int operand1, int operand2, MathOperations mathOperation, Task previousTask)
         {           
@@ -21,10 +21,12 @@ namespace HellowWorld
             CorrectAnswer = CurrentCorrectAnswer(Operand1, Operand2, MathOperation);
             PreviousTask = previousTask;
         }
+        /// <summary>
+        /// возващает правильный ответ на текущее задание
+        /// для дробей в случае деления округление до сотых
+        /// </summary>        
         private double CurrentCorrectAnswer(int operand1, int operand2, MathOperations MathOperation)
-        {
-            //возващает правильный ответ на текущее задание
-            //для дробей в случае деления округление до сотых
+        {   
             switch (MathOperation)
             {
                 case MathOperations.Add:

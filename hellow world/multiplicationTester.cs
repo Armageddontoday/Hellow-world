@@ -89,10 +89,8 @@ namespace HellowWorld
 
         private Task PrepareNewTask(Task previousTask)
         {
-            var rand = new Random();           
-            int operand1 = rand.Next(1, 10);
-            int operand2 = rand.Next(1, 10);
-            return new Task(operand1, operand2, RandomMathOperation(), previousTask);
+            var random = new Random();                       
+            return new Task(random.Next(1, 10), random.Next(1, 10), RandomMathOperation(), previousTask);
         }
         private MathOperations RandomMathOperation()
         {
