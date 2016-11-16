@@ -10,8 +10,8 @@ namespace HellowWorld
     {        
         public int Operand1 { get; private set; }
         public int Operand2 { get; private set; }        
-        public MathOperations MathOperation;      
-        public double CorrectAnswer;
+        public MathOperations MathOperation { get; private set; }
+        public double CorrectAnswer { get; private set; }
         public Task PreviousTask { get; private set; }
         public Task(int operand1, int operand2, MathOperations mathOperation, Task previousTask)
         {           
