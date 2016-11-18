@@ -6,6 +6,23 @@ using System.Threading.Tasks;
 
 namespace HellowWorld
 {
+    public enum RoundStatuses //
+    {
+        Initial,
+        Next,
+        CorrectAnswer,
+        IncorrectAnswer,
+        InvalidInput,
+        Exit
+    }
+    public enum MathOperations
+    {
+        Add,
+        Substract,
+        Multiplicate,
+        Divide,
+        Degree
+    }
 
     class MultiplicationTester
     {
@@ -15,34 +32,24 @@ namespace HellowWorld
         public int StartTest()
         {
             Task currentTask = null;            
-            var status = RoundStatuses.Initial;
-
+            var status = RoundStatuses.Initial;           
             while (true) 
-            {                
+            {
                 currentTask =  PrepareNewTask(currentTask);                
-                status = StartTestRound(currentTask, status);
-                if (status == RoundStatuses.Next)
-                    continue; //при "next"- новая итерация
+                status = StartTestRound(currentTask,  status);                
                 if (status == RoundStatuses.Exit)
                 {
                     return 1;
                 }               
             }           
         }        
-        public enum RoundStatuses //
-        {
-            Initial,                        
-            Next,
-            CorrectAnswer,            
-            IncorrectAnswer,
-            InvalidInput,
-            Exit
-        }
+        
 
         private RoundStatuses StartTestRound(Task task, RoundStatuses status)
         {
             var userInputAnalyzer = new UserInputAnalyzer();
             string userInput = null;
+            
             while (true)
             {
                 uiHelper.ShowMessage(task, status, userInput);
@@ -62,11 +69,7 @@ namespace HellowWorld
                 }
                 if (userInputAnalyzer.IsCorrectAnswer(task, userInput))//если да, то правильный ли ответ
                 {
-                    return RoundStatuses.CorrectAnswer;
-                        
-                        //при правильном ответе нужны новые значение Task, поэтому  используется
-                        //тот же механизм, что и при  команде Next, только в данном случае 
-                        //выводится сообщение о успехе 
+                    return RoundStatuses.CorrectAnswer;   
                 }
                 else
                 {
@@ -80,10 +83,27 @@ namespace HellowWorld
 
         private Task PrepareNewTask(Task previousTask)
         {
-            var rand = new Random();           
-            int operand1 = rand.Next(1, 10);
-            int operand2 = rand.Next(1, 10);
-            return new Task(operand1, operand2, previousTask);
+            var random = new Random();                       
+            return new Task(random.Next(1, 10), random.Next(1, 10), GetRandomMathOperation(), previousTask);
+        }
+        private MathOperations GetRandomMathOperation()
+        {
+            var rand = new Random();
+            int mathOperationNumber = rand.Next(1, 6);
+            switch(mathOperationNumber)
+            {
+                case 1:
+                    return MathOperations.Add;                    
+                case 2:
+                    return MathOperations.Substract;                    
+                case 3:
+                    return MathOperations.Multiplicate;
+                case 4:
+                    return MathOperations.Divide;
+                case 5:
+                    return MathOperations.Degree;
+            }
+            return 0;
         }
     }
 }

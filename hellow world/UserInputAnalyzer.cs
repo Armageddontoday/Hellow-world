@@ -24,7 +24,7 @@ namespace HellowWorld
         {
             try
             {
-                int.Parse(userInput);
+                double.Parse(userInput);
                 return true;
             }
             catch
@@ -34,7 +34,7 @@ namespace HellowWorld
         }
         public bool IsCorrectAnswer(Task task, string userInput)
         {
-            if (int.Parse(userInput) == task.Operand1 * task.Operand2)
+            if (double.Parse(userInput) == task.CorrectAnswer)
                 return true;
             return false;
         }

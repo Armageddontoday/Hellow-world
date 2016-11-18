@@ -8,28 +8,28 @@ namespace HellowWorld
 {
     class UIHelper
     {
-        public void ShowMessage(Task task, MultiplicationTester.RoundStatuses status, string userAnswer)
+        public void ShowMessage(Task task, RoundStatuses status, string userAnswer)
         {
             switch (status)
             {
-                case MultiplicationTester.RoundStatuses.Initial:
+                case RoundStatuses.Initial:
                     ShowGreetingMessage();
                     ShowCurrentTask(task);
                     break;
-                case MultiplicationTester.RoundStatuses.CorrectAnswer:                    
+                case RoundStatuses.CorrectAnswer:                    
                     ShowNewCorrectAnswer(task);
                     ShowCurrentTask(task);
                     break;
-                case MultiplicationTester.RoundStatuses.IncorrectAnswer:
+                case RoundStatuses.IncorrectAnswer:
                     ShowGreetingMessage();
-                    ShowWrongAnswer(task, int.Parse(userAnswer));
+                    ShowWrongAnswer(task, double.Parse(userAnswer));
                     ShowCurrentTask(task);
                     break;
-                case MultiplicationTester.RoundStatuses.Next:
+                case RoundStatuses.Next:
                     ShowGreetingMessage();
                     ShowCurrentTask(task);
                     break;
-                case MultiplicationTester.RoundStatuses.InvalidInput:
+                case RoundStatuses.InvalidInput:
                     ShowGreetingMessage();
                     ShowErrorMessage();
                     ShowCurrentTask(task);
@@ -44,8 +44,8 @@ namespace HellowWorld
         {
             Console.Clear();
             Console.WriteLine("Hellow, User!");
-            Console.WriteLine("Type answer or \"Exit\" to exit.");
-            Console.WriteLine("Type \"Next\" for another task.");
+            Console.WriteLine("Type answer or use commands\"Exit\" to exit or \"Next\" for another task.");
+            Console.WriteLine("In case of a fractional answer type number rounded to the hundredths");
             Console.WriteLine();
         }
         /// <summary>
@@ -57,8 +57,9 @@ namespace HellowWorld
             ShowGreetingMessage();
             Console.WriteLine("Input error!");
             Console.WriteLine("You have to enter number or use \"Exit\" / \"Next\" command.");
+            Console.WriteLine("In case of a fractional answer type number rounded to the hundredths");
             Console.WriteLine("Let's try again:");
-            Console.WriteLine();
+            
         }
         /// <summary>
         /// Набор строк о правильном ответе. Очищает экран, выводит первые строки. 
@@ -68,7 +69,7 @@ namespace HellowWorld
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} * {1} = {2}!", task.PreviousTask.Operand1, task.PreviousTask.Operand2, task.PreviousTask.Operand1 * task.PreviousTask.Operand2);
+            Console.WriteLine("{0} {2} {1} = {3}!", task.PreviousTask.Operand1, task.PreviousTask.Operand2, GetMathOperationChar(task.PreviousTask.MathOperation), task.PreviousTask.CorrectAnswer);
             Console.WriteLine("Correct!");
             Console.WriteLine("Lets play another one!");
             Console.WriteLine();
@@ -76,11 +77,11 @@ namespace HellowWorld
         /// <summary>
         /// Аналогично ShowCorrectAnswer, но выдаёт сообщение об ошибочном ответе
         /// </summary>
-        public void ShowWrongAnswer(Task task, int answer)
+        public void ShowWrongAnswer(Task task, double answer)
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} * {1} isn't = {2}!", task.Operand1, task.Operand2, answer);
+            Console.WriteLine("{0} {2} {1} isn't = {3}!", task.Operand1, task.Operand2, GetMathOperationChar(task.MathOperation), answer);
             Console.WriteLine("Your answer is incorrect!");
             Console.WriteLine("Try again:");
             Console.WriteLine();            
@@ -97,7 +98,29 @@ namespace HellowWorld
         /// </summary>
         public void ShowCurrentTask(Task task)
         {
-            Console.Write("{0} * {1}= ", task.Operand1, task.Operand2);
+            Console.Write("{0} {2} {1}= ", task.Operand1, task.Operand2, GetMathOperationChar(task.MathOperation));
+        }
+        /// <summary>
+        /// возвращает символ текущей операции для UIHelper'a
+        /// </summary>
+
+        private char GetMathOperationChar(MathOperations mathOperation)
+        {
+            switch (mathOperation)
+            {
+                case MathOperations.Add:
+                    return '+';
+                case MathOperations.Substract:
+                    return '-';
+                case MathOperations.Multiplicate:
+                    return '*';
+                case MathOperations.Divide:
+                    return '/';
+                case MathOperations.Degree:
+                    return '^';
+            }
+            return '0';
         }
     }
 }
+    
