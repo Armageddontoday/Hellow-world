@@ -46,7 +46,7 @@ namespace HellowWorld
             Console.WriteLine("Hellow, User!");
             Console.WriteLine("Type answer or use commands\"Exit\" to exit or \"Next\" for another task.");
             Console.WriteLine("In case of a fractional answer type number rounded to the hundredths");
-            Console.WriteLine();
+            Console.WriteLine();            
         }
         /// <summary>
         ///  Набор сообщений об ошибочном вводе
@@ -58,8 +58,8 @@ namespace HellowWorld
             Console.WriteLine("Input error!");
             Console.WriteLine("You have to enter number or use \"Exit\" / \"Next\" command.");
             Console.WriteLine("In case of a fractional answer type number rounded to the hundredths");
-            Console.WriteLine("Let's try again:");
-            
+            Console.WriteLine("Let's try again:");            
+
         }
         /// <summary>
         /// Набор строк о правильном ответе. Очищает экран, выводит первые строки. 
@@ -69,10 +69,10 @@ namespace HellowWorld
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} {2} {1} = {3}!", task.PreviousTask.Operand1, task.PreviousTask.Operand2, GetMathOperationChar(task.PreviousTask.MathOperation), task.PreviousTask.CorrectAnswer);
+            Console.WriteLine("{0} {2} {1} = {3}!", task.PreviousTask.Operand1, task.PreviousTask.Operand2, GetMathOperationChar(task.PreviousTask.MathOperation.CurrentMathOperation), task.PreviousTask.CorrectAnswer);
             Console.WriteLine("Correct!");
             Console.WriteLine("Lets play another one!");
-            Console.WriteLine();
+            Console.WriteLine();            
         }
         /// <summary>
         /// Аналогично ShowCorrectAnswer, но выдаёт сообщение об ошибочном ответе
@@ -81,7 +81,7 @@ namespace HellowWorld
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} {2} {1} isn't = {3}!", task.Operand1, task.Operand2, GetMathOperationChar(task.MathOperation), answer);
+            Console.WriteLine("{0} {2} {1} isn't = {3}!", task.Operand1, task.Operand2, GetMathOperationChar(task.MathOperation.CurrentMathOperation), answer);
             Console.WriteLine("Your answer is incorrect!");
             Console.WriteLine("Try again:");
             Console.WriteLine();            
@@ -98,7 +98,8 @@ namespace HellowWorld
         /// </summary>
         public void ShowCurrentTask(Task task)
         {
-            Console.Write("{0} {2} {1}= ", task.Operand1, task.Operand2, GetMathOperationChar(task.MathOperation));
+            task.MathOperation.ShowCurrentTask(task.Operand1, task.Operand1);
+            //Console.Write("{0} {2} {1} = ", task.Operand1, task.Operand2, GetMathOperationChar(task.MathOperation.CurrentMathOperation));
         }
         /// <summary>
         /// возвращает символ текущей операции для UIHelper'a
