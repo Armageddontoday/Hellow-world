@@ -84,19 +84,23 @@ namespace HellowWorld
         private Task PrepareNewTask(Task previousTask)
         {
             var random = new Random();
-            int mathOperationNumber = random.Next(1, 6);
-            switch(mathOperationNumber)
+            return new Task(random.Next(1,9), random.Next(1, 9), GetRandomMathOperation(),previousTask);
+        }
+        private IMathOperation GetRandomMathOperation()
+        {
+            var random = new Random();
+            switch(random.Next(1, 6))
             {
                 case 1:
-                    return new Task(random.Next(1, 10), random.Next(1, 10), new Add(), previousTask);                     
+                    return new AddMathOperation();
                 case 2:
-                    return new Task(random.Next(1, 10), random.Next(1, 10), new Substract(), previousTask);
+                    return new SubstractMathOperation();                   
                 case 3:
-                    return new Task(random.Next(1, 10), random.Next(1, 10), new Divide(), previousTask);
+                    return new MultiplicateMathOperation();                    
                 case 4:
-                    return new Task(random.Next(1, 10), random.Next(1, 10), new Multiplicate(), previousTask);
+                    return new DivideMathOperation();
                 case 5:
-                    return new Task(random.Next(1, 10), random.Next(1, 10), new Degree(), previousTask);
+                    return new DegreeMathOperation();
             }
             return null;
         }

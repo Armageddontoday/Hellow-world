@@ -6,64 +6,84 @@ using System.Threading.Tasks;
 
 namespace HellowWorld
 {
-    public interface IMathOperationInterface
+    public interface IMathOperation
     {
-        MathOperations CurrentMathOperation { get; }
+        MathOperations MathOperation { get; }
         double GetResult(int operand1, int operand2);       
     }
-    public abstract class AbstractMathOperationClass:IMathOperationInterface
+    public abstract class AbstractMathOperation : IMathOperation
     {
-        public MathOperations CurrentMathOperation { get; private set; }
-        public AbstractMathOperationClass(MathOperations mathOperation)
+        public MathOperations MathOperation { get; private set; }
+        public AbstractMathOperation(MathOperations mathOperation)
         {
-            CurrentMathOperation = mathOperation;
+            MathOperation = mathOperation;
         }
         public abstract double GetResult(int operand1, int operand2);        
     }
-    public class Add : AbstractMathOperationClass
+    public class AddMathOperation : AbstractMathOperation
     {
-        public Add() : base(MathOperations.Add)
+        public AddMathOperation() : base(MathOperations.Add)
         { }
         
         public override double GetResult(int operand1, int operand2)
         {
             return operand1 + operand2;
         }
+        public override string ToString()
+        {
+            return "+" ;
+        }
     }
-    public class Substract : AbstractMathOperationClass
+    public class SubstractMathOperation : AbstractMathOperation
     {
-        public Substract() : base(MathOperations.Substract)
+        public SubstractMathOperation() : base(MathOperations.Substract)
         { }
         public override double GetResult(int operand1, int operand2)
         {
             return operand1 - operand2;
         }
+        public override string ToString()
+        {
+            return "-";
+        }
     }
-    public class Multiplicate : AbstractMathOperationClass
+    public class MultiplicateMathOperation : AbstractMathOperation
     {
-        public Multiplicate() : base(MathOperations.Multiplicate)
+        public MultiplicateMathOperation() : base(MathOperations.Multiplicate)
         { }
         public override double GetResult(int operand1, int operand2)
         {
             return operand1 * operand2;
         }
+        public override string ToString()
+        {
+            return "*";
+        }
     }
-    public class Divide : AbstractMathOperationClass
+    public class DivideMathOperation : AbstractMathOperation
     {
-        public Divide() : base(MathOperations.Divide)
+        public DivideMathOperation() : base(MathOperations.Divide)
         { }
         public override double GetResult(int operand1, int operand2)
         {
             return Math.Round((double)operand1 / operand2,2);
         }
+        public override string ToString()
+        {
+            return "/";
+        }
     }
-    public class Degree : AbstractMathOperationClass
+    public class DegreeMathOperation : AbstractMathOperation
     {
-        public Degree() : base(MathOperations.Degree)
+        public DegreeMathOperation() : base(MathOperations.Degree)
         { }
         public override double GetResult(int operand1, int operand2)
         {
             return Math.Pow(operand1, operand2);
+        }
+        public override string ToString()
+        {
+            return "^";
         }
     }
 }

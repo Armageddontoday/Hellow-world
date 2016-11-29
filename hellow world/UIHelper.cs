@@ -69,7 +69,7 @@ namespace HellowWorld
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} {2} {1} = {3}!", task.PreviousTask.Operand1, task.PreviousTask.Operand2, GetMathOperationChar(task.PreviousTask.MathOperation.CurrentMathOperation), task.PreviousTask.CorrectAnswer);
+            Console.WriteLine("{0} {2} {1} = {3}!", task.PreviousTask.Operand1, task.PreviousTask.Operand2, task.PreviousTask.MathOperation.ToString(), task.PreviousTask.CorrectAnswer);
             Console.WriteLine("Correct!");
             Console.WriteLine("Lets play another one!");
             Console.WriteLine();            
@@ -81,7 +81,7 @@ namespace HellowWorld
         {
             Console.Clear();
             ShowGreetingMessage();
-            Console.WriteLine("{0} {2} {1} isn't = {3}!", task.Operand1, task.Operand2, GetMathOperationChar(task.MathOperation.CurrentMathOperation), answer);
+            Console.WriteLine("{0} {2} {1} isn't = {3}!", task.Operand1, task.Operand2, task.MathOperation.ToString(), answer);
             Console.WriteLine("Your answer is incorrect!");
             Console.WriteLine("Try again:");
             Console.WriteLine();            
@@ -98,28 +98,7 @@ namespace HellowWorld
         /// </summary>
         public void ShowCurrentTask(Task task)
         {
-            Console.Write("{0} {2} {1} = ", task.Operand1, task.Operand2, GetMathOperationChar(task.MathOperation.CurrentMathOperation));
-        }
-        /// <summary>
-        /// возвращает символ текущей операции для UIHelper'a
-        /// </summary>
-
-        private char GetMathOperationChar(MathOperations mathOperation)
-        {
-            switch (mathOperation)
-            {
-                case MathOperations.Add:
-                    return '+';
-                case MathOperations.Substract:
-                    return '-';
-                case MathOperations.Multiplicate:
-                    return '*';
-                case MathOperations.Divide:
-                    return '/';
-                case MathOperations.Degree:
-                    return '^';
-            }
-            return '0';
+            Console.Write("{0} {2} {1} = ", task.Operand1, task.Operand2, task.MathOperation.ToString());
         }
     }
 }
