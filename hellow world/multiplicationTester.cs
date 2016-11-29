@@ -32,16 +32,16 @@ namespace HellowWorld
         public int StartTest()
         {
             Task currentTask = null;            
-            var status = RoundStatuses.Initial;           
-            while (true) 
+            var status = RoundStatuses.Initial;
+            while (true)
             {
-                currentTask =  PrepareNewTask(currentTask);                
-                status = StartTestRound(currentTask,  status);                
+                currentTask = PrepareNewTask(currentTask);
+                status = StartTestRound(currentTask, status);
                 if (status == RoundStatuses.Exit)
                 {
                     return 1;
-                }               
-            }           
+                }
+            }                    
         }        
         
 
@@ -51,7 +51,7 @@ namespace HellowWorld
             string userInput = null;
             
             while (true)
-            {
+            {                
                 uiHelper.ShowMessage(task, status, userInput);
                 userInput = uiHelper.GetUserAnswer();//запрос ответа
                 if (userInputAnalyzer.IsExit(userInput))//проверка на команду выход
@@ -83,27 +83,26 @@ namespace HellowWorld
 
         private Task PrepareNewTask(Task previousTask)
         {
-            var random = new Random();                       
-            return new Task(random.Next(1, 10), random.Next(1, 10), GetRandomMathOperation(), previousTask);
+            var random = new Random();
+            return new Task(random.Next(1,9), random.Next(1, 9), GetRandomMathOperation(),previousTask);
         }
-        private MathOperations GetRandomMathOperation()
+        private IMathOperation GetRandomMathOperation()
         {
-            var rand = new Random();
-            int mathOperationNumber = rand.Next(1, 6);
-            switch(mathOperationNumber)
+            var random = new Random();
+            switch(random.Next(1, 6))
             {
                 case 1:
-                    return MathOperations.Add;                    
+                    return new AddMathOperation();
                 case 2:
-                    return MathOperations.Substract;                    
+                    return new SubstractMathOperation();                   
                 case 3:
-                    return MathOperations.Multiplicate;
+                    return new MultiplicateMathOperation();                    
                 case 4:
-                    return MathOperations.Divide;
+                    return new DivideMathOperation();
                 case 5:
-                    return MathOperations.Degree;
+                    return new DegreeMathOperation();
             }
-            return 0;
+            return null;
         }
     }
 }
