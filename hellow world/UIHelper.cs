@@ -98,8 +98,7 @@ namespace HellowWorld
         /// </summary>
         public void ShowCurrentTask(Task task)
         {
-            task.MathOperation.ShowCurrentTask(task.Operand1, task.Operand1);
-            //Console.Write("{0} {2} {1} = ", task.Operand1, task.Operand2, GetMathOperationChar(task.MathOperation.CurrentMathOperation));
+            Console.Write("{0} {2} {1} = ", task.Operand1, task.Operand2, GetMathOperationChar(task.MathOperation.CurrentMathOperation));
         }
         /// <summary>
         /// возвращает символ текущей операции для UIHelper'a

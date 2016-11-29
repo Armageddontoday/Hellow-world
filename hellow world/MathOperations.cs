@@ -9,8 +9,7 @@ namespace HellowWorld
     public interface IMathOperationInterface
     {
         MathOperations CurrentMathOperation { get; }
-        double GetResult(int operand1, int operand2);
-        void ShowCurrentTask(int operand1, int operand2);
+        double GetResult(int operand1, int operand2);       
     }
     public abstract class AbstractMathOperationClass:IMathOperationInterface
     {
@@ -19,8 +18,7 @@ namespace HellowWorld
         {
             CurrentMathOperation = mathOperation;
         }
-        public abstract double GetResult(int operand1, int operand2);
-        public abstract void ShowCurrentTask(int operand1, int operand2);
+        public abstract double GetResult(int operand1, int operand2);        
     }
     public class Add : AbstractMathOperationClass
     {
@@ -31,10 +29,6 @@ namespace HellowWorld
         {
             return operand1 + operand2;
         }
-        public override void ShowCurrentTask(int operand1, int operand2)
-        {
-            Console.Write("{0} + {1}= ", operand1, operand2);
-        }
     }
     public class Substract : AbstractMathOperationClass
     {
@@ -43,10 +37,6 @@ namespace HellowWorld
         public override double GetResult(int operand1, int operand2)
         {
             return operand1 - operand2;
-        }
-        public override void ShowCurrentTask(int operand1, int operand2)
-        {
-            Console.Write("{0} - {1}= ", operand1, operand2);
         }
     }
     public class Multiplicate : AbstractMathOperationClass
@@ -57,10 +47,6 @@ namespace HellowWorld
         {
             return operand1 * operand2;
         }
-        public override void ShowCurrentTask(int operand1, int operand2)
-        {
-            Console.Write("{0} * {1}= ", operand1, operand2);
-        }
     }
     public class Divide : AbstractMathOperationClass
     {
@@ -70,10 +56,6 @@ namespace HellowWorld
         {
             return Math.Round((double)operand1 / operand2,2);
         }
-        public override void ShowCurrentTask(int operand1, int operand2)
-        {
-            Console.Write("{0} / {1}= ", operand1, operand2);
-        }
     }
     public class Degree : AbstractMathOperationClass
     {
@@ -82,10 +64,6 @@ namespace HellowWorld
         public override double GetResult(int operand1, int operand2)
         {
             return Math.Pow(operand1, operand2);
-        }
-        public override void ShowCurrentTask(int operand1, int operand2)
-        {
-            Console.Write("{0} ^ {1}= ", operand1, operand2);
         }
     }
 }
