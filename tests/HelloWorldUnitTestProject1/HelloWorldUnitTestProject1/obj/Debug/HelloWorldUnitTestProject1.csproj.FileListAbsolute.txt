@@ -1,0 +1,13 @@
+C:\Users\Владелец\Documents\GitHub\Hellow-world\tests\HelloWorldUnitTestProject1\HelloWorldUnitTestProject1\bin\Debug\HelloWorldUnitTestProject1.dll
+C:\Users\Владелец\Documents\GitHub\Hellow-world\tests\HelloWorldUnitTestProject1\HelloWorldUnitTestProject1\bin\Debug\HelloWorldUnitTestProject1.pdb
+C:\Users\Владелец\Documents\GitHub\Hellow-world\tests\HelloWorldUnitTestProject1\HelloWorldUnitTestProject1\bin\Debug\hellow world.exe
+C:\Users\Владелец\Documents\GitHub\Hellow-world\tests\HelloWorldUnitTestProject1\HelloWorldUnitTestProject1\bin\Debug\hellow world.pdb
+C:\Users\Владелец\Documents\GitHub\Hellow-world\tests\HelloWorldUnitTestProject1\HelloWorldUnitTestProject1\obj\Debug\HelloWorldUnitTestProject1.csprojResolveAssemblyReference.cache
+C:\Users\Владелец\Documents\GitHub\Hellow-world\tests\HelloWorldUnitTestProject1\HelloWorldUnitTestProject1\obj\Debug\HelloWorldUnitTestProject1.dll
+C:\Users\Владелец\Documents\GitHub\Hellow-world\tests\HelloWorldUnitTestProject1\HelloWorldUnitTestProject1\obj\Debug\HelloWorldUnitTestProject1.pdb
+C:\Users\Владелец\Documents\GitHub\Hellow-world\tests\HelloWorldUnitTestProject1\HelloWorldUnitTestProject1\bin\Debug\Castle.Core.dll
+C:\Users\Владелец\Documents\GitHub\Hellow-world\tests\HelloWorldUnitTestProject1\HelloWorldUnitTestProject1\bin\Debug\Moq.dll
+C:\Users\Владелец\Documents\GitHub\Hellow-world\tests\HelloWorldUnitTestProject1\HelloWorldUnitTestProject1\bin\Debug\nunit.framework.dll
+C:\Users\Владелец\Documents\GitHub\Hellow-world\tests\HelloWorldUnitTestProject1\HelloWorldUnitTestProject1\bin\Debug\Castle.Core.xml
+C:\Users\Владелец\Documents\GitHub\Hellow-world\tests\HelloWorldUnitTestProject1\HelloWorldUnitTestProject1\bin\Debug\Moq.xml
+C:\Users\Владелец\Documents\GitHub\Hellow-world\tests\HelloWorldUnitTestProject1\HelloWorldUnitTestProject1\bin\Debug\nunit.framework.xml
