@@ -3,11 +3,10 @@ using System;
 using HellowWorld;
 using Moq;
 using NUnit;
+using NUnit.Framework;
 
-//namespace HelloWorld
-namespace NUnit.Framework.Tests
+namespace HelloWorld
 {
-
     /// <summary>
     /// тесты присваивания значения поля MathOperation в классах мат. операций
     /// </summary>
@@ -16,33 +15,28 @@ namespace NUnit.Framework.Tests
     {
         [Test]
         public void AddMathOpInitialization()
-        {
-            var add = new AddMathOperation();
-            Assert.AreEqual(add.MathOperation, MathOperations.Add);
+        {            
+            Assert.AreEqual(new AddMathOperation().MathOperation, MathOperations.Add);
         }
         [Test]
         public void SubstractMathOpInitialization()
         {
-            var substract = new SubstractMathOperation();
-            Assert.AreEqual(substract.MathOperation, MathOperations.Substract);
+            Assert.AreEqual(new SubstractMathOperation().MathOperation, MathOperations.Substract);
         }
         [Test]
         public void MultiplicateMathOpInitialization()
         {
-            var multiplication = new MultiplicateMathOperation();
-            Assert.AreEqual(multiplication.MathOperation, MathOperations.Multiplicate);
+            Assert.AreEqual(new MultiplicateMathOperation().MathOperation, MathOperations.Multiplicate);
         }
         [Test]
         public void DivideMathOpInitialization()
         {
-            var divide = new DivideMathOperation();
-            Assert.AreEqual(divide.MathOperation, MathOperations.Divide);
+            Assert.AreEqual(new DivideMathOperation().MathOperation, MathOperations.Divide);
         }
         [Test]
         public void DegreeMathOpInitialization()
         {
-            var degre = new DegreeMathOperation();
-            Assert.AreEqual(degre.MathOperation, MathOperations.Degree);
+            Assert.AreEqual(new PowerMathOperation().MathOperation, MathOperations.Power);
         }
     }
 }

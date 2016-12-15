@@ -3,11 +3,10 @@ using System;
 using HellowWorld;
 using Moq;
 using NUnit;
+using NUnit.Framework;
 
-//namespace HelloWorld
-namespace NUnit.Framework.Tests
+namespace HelloWorld
 {
-
     /// <summary>
     /// тесты правильности возвращаемого символа
     /// </summary>
@@ -17,36 +16,31 @@ namespace NUnit.Framework.Tests
         [Test]
         public void AddOperationCharGetting()
         {
-            var add = new AddMathOperation();
-            Assert.AreEqual(add.ToString(), "+");
+            Assert.AreEqual(new AddMathOperation().ToString(), "+");
         }
 
         [Test]
         public void SubstractOperationCharGetting()
         {
-            var substract = new SubstractMathOperation();
-            Assert.AreEqual(substract.ToString(), "-");
+            Assert.AreEqual(new SubstractMathOperation().ToString(), "-");
         }
 
         [Test]
         public void MultiplicateOperationCharGetting()
         {
-            var multiplicate = new MultiplicateMathOperation();
-            Assert.AreEqual(multiplicate.ToString(), "*");
+            Assert.AreEqual(new MultiplicateMathOperation().ToString(), "*");
         }
 
         [Test]
         public void DivideOperationCharGetting()
         {
-            var divide = new DivideMathOperation();
-            Assert.AreEqual(divide.ToString(), "/");
+            Assert.AreEqual(new DivideMathOperation().ToString(), "/");
         }
 
         [Test]
         public void DegreeOperationCharGetting()
         {
-            var degree = new DegreeMathOperation();
-            Assert.AreEqual(degree.ToString(), "^");
+            Assert.AreEqual(new PowerMathOperation().ToString(), "^");
         }
     }
 }
