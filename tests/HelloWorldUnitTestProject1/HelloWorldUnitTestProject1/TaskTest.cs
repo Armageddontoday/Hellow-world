@@ -3,9 +3,9 @@ using System;
 using HellowWorld;
 using Moq;
 using NUnit;
+using NUnit.Framework;
 
-//namespace HelloWorld
-namespace NUnit.Framework.Tests
+namespace HelloWorld
 {
     /// <summary>
     /// тесты правильности возвращаемого символа

@@ -21,7 +21,7 @@ namespace HellowWorld
         Substract,
         Multiplicate,
         Divide,
-        Degree
+        Power
     }
 
     class MultiplicationTester
@@ -100,7 +100,7 @@ namespace HellowWorld
                 case 4:
                     return new DivideMathOperation();
                 case 5:
-                    return new DegreeMathOperation();
+                    return new PowerMathOperation();
             }
             return null;
         }

@@ -73,9 +73,9 @@ namespace HellowWorld
             return "/";
         }
     }
-    public class DegreeMathOperation : AbstractMathOperation
+    public class PowerMathOperation : AbstractMathOperation
     {
-        public DegreeMathOperation() : base(MathOperations.Degree)
+        public PowerMathOperation() : base(MathOperations.Power)
         { }
         public override double GetResult(int operand1, int operand2)
         {
