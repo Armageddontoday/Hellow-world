@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HellowWorld
 {
     class UIHelper
-    {
+    {        
         public void ShowMessage(Task task, RoundStatuses status, string userAnswer)
         {
             switch (status)
@@ -64,7 +64,7 @@ namespace HellowWorld
         /// <summary>
         /// Набор строк о правильном ответе. Очищает экран, выводит первые строки. 
         /// Показывает выражение и введённый ответ, выдает сообщение об успехе.
-        /// </summary>
+        /// </summary>        
         public void ShowNewCorrectAnswer(Task task)
         {
             Console.Clear();

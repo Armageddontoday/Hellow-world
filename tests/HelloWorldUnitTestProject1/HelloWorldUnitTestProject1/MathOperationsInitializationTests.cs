@@ -34,7 +34,7 @@ namespace HelloWorld
             Assert.AreEqual(new DivideMathOperation().MathOperation, MathOperations.Divide);
         }
         [Test]
-        public void DegreeMathOpInitialization()
+        public void PowerMathOpInitialization()
         {
             Assert.AreEqual(new PowerMathOperation().MathOperation, MathOperations.Power);
         }

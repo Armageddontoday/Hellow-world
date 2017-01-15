@@ -38,7 +38,7 @@ namespace HelloWorld
         }
 
         [Test]
-        public void DegreeOperationCharGetting()
+        public void PowerOperationCharGetting()
         {
             Assert.AreEqual(new PowerMathOperation().ToString(), "^");
         }

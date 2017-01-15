@@ -6,6 +6,21 @@ using System.Threading.Tasks;
 
 namespace HellowWorld
 {
+    public class TaskFactory
+    {       
+        Random random = new Random();
+        private IMathOpFactory RandomMathOp;
+        public TaskFactory()
+        {             
+        }       
+        public Task PrepareNewTask(Task previousTask)
+        {
+            IMathOpFactory[] MathOperationsMassive = { new AddCreator(), new SubstractCreator(), new MultiplicateCreator(), new DivideCreator(), new PowerCreator() };
+            RandomMathOp = MathOperationsMassive[random.Next(0, 5)];
+            return new Task(random.Next(1, 10), random.Next(1, 10), RandomMathOp.Create(), previousTask);
+        }
+    }
+
     public interface IMathOperation
     {
         MathOperations MathOperation { get; }
@@ -84,6 +99,50 @@ namespace HellowWorld
         public override string ToString()
         {
             return "^";
+        }
+    }
+
+    public interface IMathOpFactory
+    {
+        IMathOperation Create();
+    }
+    public abstract class AbstractMathOpFactory : IMathOpFactory
+    {
+        public abstract IMathOperation Create();
+    }
+    public class AddCreator : AbstractMathOpFactory
+    {
+        public override IMathOperation Create()
+        {
+            return new AddMathOperation();
+        }
+    }
+    public class SubstractCreator : AbstractMathOpFactory
+    {
+        public override IMathOperation Create()
+        {
+            return new SubstractMathOperation();
+        }
+    }
+    public class MultiplicateCreator : AbstractMathOpFactory
+    {
+        public override IMathOperation Create()
+        {
+            return new MultiplicateMathOperation();
+        }
+    }
+    public class DivideCreator : AbstractMathOpFactory
+    {
+        public override IMathOperation Create()
+        {
+            return new DivideMathOperation();
+        }
+    }
+    public class PowerCreator : AbstractMathOpFactory
+    {
+        public override IMathOperation Create()
+        {
+            return new PowerMathOperation();
         }
     }
 }

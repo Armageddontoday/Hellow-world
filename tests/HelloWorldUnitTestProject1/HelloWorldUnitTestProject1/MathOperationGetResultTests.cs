@@ -38,7 +38,7 @@ namespace HelloWorld
         }
 
         [Test]
-        public void DegreeMathResult()
+        public void PowerMathResult()
         {            
             Assert.AreEqual(32, new PowerMathOperation().GetResult(2, 5));
         }

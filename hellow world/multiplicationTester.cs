@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HellowWorld
 {
-    public enum RoundStatuses //
+    public enum RoundStatuses 
     {
         Initial,
         Next,
@@ -26,25 +26,23 @@ namespace HellowWorld
 
     class MultiplicationTester
     {
-        //т.к. эти переменные постоянно используются в разных методах, вынес их в общий доступ для всего класса
-        UIHelper uiHelper = new UIHelper();
-       
+        UIHelper uiHelper = new UIHelper();       
         public int StartTest()
-        {
-            Task currentTask = null;            
+        {            
+            var taskFactory = new TaskFactory();         
             var status = RoundStatuses.Initial;
+            Task currentTask = null;     
             while (true)
-            {
-                currentTask = PrepareNewTask(currentTask);
+            {               
+                currentTask= taskFactory.PrepareNewTask(currentTask);
                 status = StartTestRound(currentTask, status);
                 if (status == RoundStatuses.Exit)
                 {
                     return 1;
                 }
             }                    
-        }        
-        
-
+        }
+       
         private RoundStatuses StartTestRound(Task task, RoundStatuses status)
         {
             var userInputAnalyzer = new UserInputAnalyzer();
@@ -78,31 +76,6 @@ namespace HellowWorld
                 }     
             }       
 
-        }
-
-
-        private Task PrepareNewTask(Task previousTask)
-        {
-            var random = new Random();
-            return new Task(random.Next(1,9), random.Next(1, 9), GetRandomMathOperation(),previousTask);
-        }
-        private IMathOperation GetRandomMathOperation()
-        {
-            var random = new Random();
-            switch(random.Next(1, 6))
-            {
-                case 1:
-                    return new AddMathOperation();
-                case 2:
-                    return new SubstractMathOperation();                   
-                case 3:
-                    return new MultiplicateMathOperation();                    
-                case 4:
-                    return new DivideMathOperation();
-                case 5:
-                    return new PowerMathOperation();
-            }
-            return null;
         }
     }
 }
