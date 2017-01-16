@@ -26,17 +26,28 @@ namespace HellowWorld
 
     class MultiplicationTester
     {
-        UIHelper uiHelper = new UIHelper();       
+        private TaskFactory _taskFactory;
+        private UIHelper _uiHelper = new UIHelper();
+        private RoundStatuses _status;
+        private Task _currentTask;
+        private  UserInputAnalyzer _userInputAnalyzer;
+        private string _userInput;
+
+        public MultiplicationTester()
+        {
+            _taskFactory = new TaskFactory();
+            _status = RoundStatuses.Initial;
+            _currentTask = null;
+        }
+
         public int StartTest()
         {            
-            var taskFactory = new TaskFactory();         
-            var status = RoundStatuses.Initial;
-            Task currentTask = null;     
+            
             while (true)
-            {               
-                currentTask= taskFactory.PrepareNewTask(currentTask);
-                status = StartTestRound(currentTask, status);
-                if (status == RoundStatuses.Exit)
+            {
+                _currentTask = _taskFactory.PrepareNewTask(_currentTask);
+                _status = StartTestRound(_currentTask, _status);
+                if (_status == RoundStatuses.Exit)
                 {
                     return 1;
                 }
@@ -45,27 +56,27 @@ namespace HellowWorld
        
         private RoundStatuses StartTestRound(Task task, RoundStatuses status)
         {
-            var userInputAnalyzer = new UserInputAnalyzer();
-            string userInput = null;
+            _userInputAnalyzer = new UserInputAnalyzer();
+            _userInput = null;
             
             while (true)
-            {                
-                uiHelper.ShowMessage(task, status, userInput);
-                userInput = uiHelper.GetUserAnswer();//запрос ответа
-                if (userInputAnalyzer.IsExit(userInput))//проверка на команду выход
+            {
+                _uiHelper.ShowMessage(task, status, _userInput);
+                _userInput = _uiHelper.GetUserAnswer();//запрос ответа
+                if (_userInputAnalyzer.IsExit(_userInput))//проверка на команду выход
                 {
                     return RoundStatuses.Exit;
                 }
-                if (userInputAnalyzer.IsNext(userInput))//проверка на команду следующего варианта
+                if (_userInputAnalyzer.IsNext(_userInput))//проверка на команду следующего варианта
                 {
                     return RoundStatuses.Next;
                 }
-                if (!userInputAnalyzer.IsNumber(userInput))//проверка введено ли число
+                if (!_userInputAnalyzer.IsNumber(_userInput))//проверка введено ли число
                 {
                     status = RoundStatuses.InvalidInput;
                     continue;
                 }
-                if (userInputAnalyzer.IsCorrectAnswer(task, userInput))//если да, то правильный ли ответ
+                if (_userInputAnalyzer.IsCorrectAnswer(task, _userInput))//если да, то правильный ли ответ
                 {
                     return RoundStatuses.CorrectAnswer;   
                 }

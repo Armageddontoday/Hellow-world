@@ -7,17 +7,25 @@ using System.Threading.Tasks;
 namespace HellowWorld
 {
     public class TaskFactory
-    {       
-        Random random = new Random();
-        private IMathOpFactory RandomMathOp;
+    {
+        private IMathOperationsFactory _randomMathOp;
+        private Random _random;
+        private IMathOperationsFactory[] _mathOperationsFactoryArray = new IMathOperationsFactory[5];
+
         public TaskFactory()
-        {             
-        }       
+        {
+            _random = new Random();
+            _mathOperationsFactoryArray[0] = new AddFactory();
+            _mathOperationsFactoryArray[1] = new SubstractFactory();
+            _mathOperationsFactoryArray[2] = new MultiplicateFactory();
+            _mathOperationsFactoryArray[3] = new DivideFactory();
+            _mathOperationsFactoryArray[4] = new PowerFactory();
+        }
+    
         public Task PrepareNewTask(Task previousTask)
         {
-            IMathOpFactory[] MathOperationsMassive = { new AddCreator(), new SubstractCreator(), new MultiplicateCreator(), new DivideCreator(), new PowerCreator() };
-            RandomMathOp = MathOperationsMassive[random.Next(0, 5)];
-            return new Task(random.Next(1, 10), random.Next(1, 10), RandomMathOp.Create(), previousTask);
+            _randomMathOp = _mathOperationsFactoryArray[_random.Next(0, 5)];
+            return new Task(_random.Next(1, 10), _random.Next(1, 10), _randomMathOp.Create(), previousTask);
         }
     }
 
@@ -102,45 +110,41 @@ namespace HellowWorld
         }
     }
 
-    public interface IMathOpFactory
+    public interface IMathOperationsFactory
     {
         IMathOperation Create();
-    }
-    public abstract class AbstractMathOpFactory : IMathOpFactory
+    }   
+    public class AddFactory : IMathOperationsFactory
     {
-        public abstract IMathOperation Create();
-    }
-    public class AddCreator : AbstractMathOpFactory
-    {
-        public override IMathOperation Create()
+        public  IMathOperation Create()
         {
             return new AddMathOperation();
         }
     }
-    public class SubstractCreator : AbstractMathOpFactory
+    public class SubstractFactory : IMathOperationsFactory
     {
-        public override IMathOperation Create()
+        public  IMathOperation Create()
         {
             return new SubstractMathOperation();
         }
     }
-    public class MultiplicateCreator : AbstractMathOpFactory
+    public class MultiplicateFactory : IMathOperationsFactory
     {
-        public override IMathOperation Create()
+        public  IMathOperation Create()
         {
             return new MultiplicateMathOperation();
         }
     }
-    public class DivideCreator : AbstractMathOpFactory
+    public class DivideFactory : IMathOperationsFactory
     {
-        public override IMathOperation Create()
+        public  IMathOperation Create()
         {
             return new DivideMathOperation();
         }
     }
-    public class PowerCreator : AbstractMathOpFactory
+    public class PowerFactory : IMathOperationsFactory
     {
-        public override IMathOperation Create()
+        public  IMathOperation Create()
         {
             return new PowerMathOperation();
         }
