@@ -10,19 +10,22 @@ namespace HellowWorld
     {
         private IMathOperationsFactory _randomMathOp;
         private Random _random;
-        private IMathOperationsFactory[] _mathOperationsFactoryArray = new IMathOperationsFactory[5];
+        private IMathOperationsFactory[] _mathOperationsFactoryArray;
 
         public TaskFactory()
         {
             _random = new Random();
-            _mathOperationsFactoryArray[0] = new AddFactory();
-            _mathOperationsFactoryArray[1] = new SubstractFactory();
-            _mathOperationsFactoryArray[2] = new MultiplicateFactory();
-            _mathOperationsFactoryArray[3] = new DivideFactory();
-            _mathOperationsFactoryArray[4] = new PowerFactory();
+            _mathOperationsFactoryArray = new IMathOperationsFactory[]
+             {
+                new AddFactory(),
+                new SubstractFactory(),
+                new MultiplicateFactory(),
+                new DivideFactory(),
+                new PowerFactory()
+             };
         }
     
-        public Task PrepareNewTask(Task previousTask)
+        public Task CreateNewTask(Task previousTask)
         {
             _randomMathOp = _mathOperationsFactoryArray[_random.Next(0, 5)];
             return new Task(_random.Next(1, 10), _random.Next(1, 10), _randomMathOp.Create(), previousTask);
