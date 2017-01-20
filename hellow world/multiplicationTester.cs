@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HellowWorld
 {
-    public enum RoundStatuses //
+    public enum RoundStatuses 
     {
         Initial,
         Next,
@@ -26,48 +26,54 @@ namespace HellowWorld
 
     class MultiplicationTester
     {
-        //т.к. эти переменные постоянно используются в разных методах, вынес их в общий доступ для всего класса
-        UIHelper uiHelper = new UIHelper();
-       
+        private TaskFactory _taskFactory;
+        private UIHelper _uiHelper;
+        private RoundStatuses _status;         
+        private UserInputAnalyzer _userInputAnalyzer;
+
+        public MultiplicationTester()
+        {
+            _uiHelper = new UIHelper();
+            _taskFactory = new TaskFactory();
+            _status = RoundStatuses.Initial;
+            _userInputAnalyzer = new UserInputAnalyzer();
+        }
+
         public int StartTest()
         {
-            Task currentTask = null;            
-            var status = RoundStatuses.Initial;
+            Task  _currentTask = null; ;
             while (true)
             {
-                currentTask = PrepareNewTask(currentTask);
-                status = StartTestRound(currentTask, status);
-                if (status == RoundStatuses.Exit)
+                _currentTask = _taskFactory.Create(_currentTask);
+                _status = StartTestRound(_currentTask, _status);
+                if (_status == RoundStatuses.Exit)
                 {
                     return 1;
                 }
             }                    
-        }        
-        
-
+        }
+       
         private RoundStatuses StartTestRound(Task task, RoundStatuses status)
         {
-            var userInputAnalyzer = new UserInputAnalyzer();
-            string userInput = null;
-            
+            string _userInput = null;            
             while (true)
-            {                
-                uiHelper.ShowMessage(task, status, userInput);
-                userInput = uiHelper.GetUserAnswer();//запрос ответа
-                if (userInputAnalyzer.IsExit(userInput))//проверка на команду выход
+            {
+                _uiHelper.ShowMessage(task, status, _userInput);
+                _userInput = _uiHelper.GetUserAnswer();//запрос ответа
+                if (_userInputAnalyzer.IsExit(_userInput))//проверка на команду выход
                 {
                     return RoundStatuses.Exit;
                 }
-                if (userInputAnalyzer.IsNext(userInput))//проверка на команду следующего варианта
+                if (_userInputAnalyzer.IsNext(_userInput))//проверка на команду следующего варианта
                 {
                     return RoundStatuses.Next;
                 }
-                if (!userInputAnalyzer.IsNumber(userInput))//проверка введено ли число
+                if (!_userInputAnalyzer.IsNumber(_userInput))//проверка введено ли число
                 {
                     status = RoundStatuses.InvalidInput;
                     continue;
                 }
-                if (userInputAnalyzer.IsCorrectAnswer(task, userInput))//если да, то правильный ли ответ
+                if (_userInputAnalyzer.IsCorrectAnswer(task, _userInput))//если да, то правильный ли ответ
                 {
                     return RoundStatuses.CorrectAnswer;   
                 }
@@ -78,31 +84,6 @@ namespace HellowWorld
                 }     
             }       
 
-        }
-
-
-        private Task PrepareNewTask(Task previousTask)
-        {
-            var random = new Random();
-            return new Task(random.Next(1,9), random.Next(1, 9), GetRandomMathOperation(),previousTask);
-        }
-        private IMathOperation GetRandomMathOperation()
-        {
-            var random = new Random();
-            switch(random.Next(1, 6))
-            {
-                case 1:
-                    return new AddMathOperation();
-                case 2:
-                    return new SubstractMathOperation();                   
-                case 3:
-                    return new MultiplicateMathOperation();                    
-                case 4:
-                    return new DivideMathOperation();
-                case 5:
-                    return new PowerMathOperation();
-            }
-            return null;
         }
     }
 }

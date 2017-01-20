@@ -6,6 +6,31 @@ using System.Threading.Tasks;
 
 namespace HellowWorld
 {
+    public class TaskFactory
+    {        
+        private Random _random;
+        private IMathOperationsFactory[] _mathOperationsFactories;
+
+        public TaskFactory()
+        {
+            _random = new Random();
+            _mathOperationsFactories = new IMathOperationsFactory[]
+             {
+                new AddFactory(),
+                new SubstractFactory(),
+                new MultiplicateFactory(),
+                new DivideFactory(),
+                new PowerFactory()
+             };
+        }
+    
+        public Task Create(Task previousTask)
+        {
+            IMathOperationsFactory _randomMathOp = _mathOperationsFactories[_random.Next(0, 5)];
+            return new Task(_random.Next(1, 10), _random.Next(1, 10), _randomMathOp.Create(), previousTask);
+        }
+    }
+
     public interface IMathOperation
     {
         MathOperations MathOperation { get; }
@@ -84,6 +109,46 @@ namespace HellowWorld
         public override string ToString()
         {
             return "^";
+        }
+    }
+
+    public interface IMathOperationsFactory
+    {
+        IMathOperation Create();
+    }   
+    public class AddFactory : IMathOperationsFactory
+    {
+        public  IMathOperation Create()
+        {
+            return new AddMathOperation();
+        }
+    }
+    public class SubstractFactory : IMathOperationsFactory
+    {
+        public  IMathOperation Create()
+        {
+            return new SubstractMathOperation();
+        }
+    }
+    public class MultiplicateFactory : IMathOperationsFactory
+    {
+        public  IMathOperation Create()
+        {
+            return new MultiplicateMathOperation();
+        }
+    }
+    public class DivideFactory : IMathOperationsFactory
+    {
+        public  IMathOperation Create()
+        {
+            return new DivideMathOperation();
+        }
+    }
+    public class PowerFactory : IMathOperationsFactory
+    {
+        public  IMathOperation Create()
+        {
+            return new PowerMathOperation();
         }
     }
 }
