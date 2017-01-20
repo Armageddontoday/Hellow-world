@@ -30,11 +30,13 @@ namespace HellowWorld
         private UIHelper _uiHelper;
         private RoundStatuses _status;         
         private UserInputAnalyzer _userInputAnalyzer;
+
         public MultiplicationTester()
         {
             _uiHelper = new UIHelper();
             _taskFactory = new TaskFactory();
-            _status = RoundStatuses.Initial;            
+            _status = RoundStatuses.Initial;
+            _userInputAnalyzer = new UserInputAnalyzer();
         }
 
         public int StartTest()
@@ -42,7 +44,7 @@ namespace HellowWorld
             Task  _currentTask = null; ;
             while (true)
             {
-                _currentTask = _taskFactory.CreateNewTask(_currentTask);
+                _currentTask = _taskFactory.Create(_currentTask);
                 _status = StartTestRound(_currentTask, _status);
                 if (_status == RoundStatuses.Exit)
                 {
@@ -53,8 +55,7 @@ namespace HellowWorld
        
         private RoundStatuses StartTestRound(Task task, RoundStatuses status)
         {
-            string _userInput = null;
-            _userInputAnalyzer = new UserInputAnalyzer(); 
+            string _userInput = null;            
             while (true)
             {
                 _uiHelper.ShowMessage(task, status, _userInput);

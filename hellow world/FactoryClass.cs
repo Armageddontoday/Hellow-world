@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 namespace HellowWorld
 {
     public class TaskFactory
-    {
-        private IMathOperationsFactory _randomMathOp;
+    {        
         private Random _random;
-        private IMathOperationsFactory[] _mathOperationsFactoryArray;
+        private IMathOperationsFactory[] _mathOperationsFactories;
 
         public TaskFactory()
         {
             _random = new Random();
-            _mathOperationsFactoryArray = new IMathOperationsFactory[]
+            _mathOperationsFactories = new IMathOperationsFactory[]
              {
                 new AddFactory(),
                 new SubstractFactory(),
@@ -25,9 +24,9 @@ namespace HellowWorld
              };
         }
     
-        public Task CreateNewTask(Task previousTask)
+        public Task Create(Task previousTask)
         {
-            _randomMathOp = _mathOperationsFactoryArray[_random.Next(0, 5)];
+            IMathOperationsFactory _randomMathOp = _mathOperationsFactories[_random.Next(0, 5)];
             return new Task(_random.Next(1, 10), _random.Next(1, 10), _randomMathOp.Create(), previousTask);
         }
     }
