@@ -9,24 +9,35 @@ namespace HellowWorld
     public class TaskFactory
     {        
         private Random _random;
-        private IMathOperationsFactory[] _mathOperationsFactories;
+        private int _classCounter;
+        List<Type> testTypes = new List<Type>();
 
         public TaskFactory()
         {
             _random = new Random();
-            _mathOperationsFactories = new IMathOperationsFactory[]
-             {
-                new AddFactory(),
-                new SubstractFactory(),
-                new MultiplicateFactory(),
-                new DivideFactory(),
-                new PowerFactory()
-             };
+            _classCounter = 0;
+
+            var domain = AppDomain.CurrentDomain;           
+            var assemblies = domain.GetAssemblies();            
+            var types = new List<Type>();
+            foreach (var assembly in assemblies)
+            {
+                types.AddRange(assembly.GetTypes());
+            }            
+            var targetInterface = typeof(IMathOperationsFactory);            
+            foreach (var type in types)
+            {
+                if (targetInterface.IsAssignableFrom(type) && type.IsClass)
+                {
+                    testTypes.Add(type);
+                    _classCounter++;
+                }
+            }            
         }
     
         public Task Create(Task previousTask)
         {
-            IMathOperationsFactory _randomMathOp = _mathOperationsFactories[_random.Next(0, 5)];
+            IMathOperationsFactory _randomMathOp = (IMathOperationsFactory)Activator.CreateInstance(testTypes[_random.Next(0, _classCounter)]);            
             return new Task(_random.Next(1, 10), _random.Next(1, 10), _randomMathOp.Create(), previousTask);
         }
     }
@@ -111,6 +122,7 @@ namespace HellowWorld
             return "^";
         }
     }
+    
 
     public interface IMathOperationsFactory
     {
@@ -150,5 +162,5 @@ namespace HellowWorld
         {
             return new PowerMathOperation();
         }
-    }
+    }    
 }
