@@ -8,14 +8,12 @@ namespace HellowWorld
 {
     public class TaskFactory
     {        
-        private Random _random;
-        private int _classCounter;
-        List<Type> testTypes = new List<Type>();
+        private Random _random;       
+        private List<Type> _mathOperationFactoryTypes = new List<Type>();
 
         public TaskFactory()
         {
             _random = new Random();
-            _classCounter = 0;
 
             var domain = AppDomain.CurrentDomain;           
             var assemblies = domain.GetAssemblies();            
@@ -29,16 +27,15 @@ namespace HellowWorld
             {
                 if (targetInterface.IsAssignableFrom(type) && type.IsClass)
                 {
-                    testTypes.Add(type);
-                    _classCounter++;
+                    _mathOperationFactoryTypes.Add(type);                    
                 }
             }            
         }
     
         public Task Create(Task previousTask)
         {
-            IMathOperationsFactory _randomMathOp = (IMathOperationsFactory)Activator.CreateInstance(testTypes[_random.Next(0, _classCounter)]);            
-            return new Task(_random.Next(1, 10), _random.Next(1, 10), _randomMathOp.Create(), previousTask);
+            var mathOperationFactory = (IMathOperationsFactory)Activator.CreateInstance(_mathOperationFactoryTypes[_random.Next(0, _mathOperationFactoryTypes.Count)]);            
+            return new Task(_random.Next(1, 10), _random.Next(1, 10), mathOperationFactory.Create(), previousTask);
         }
     }
 
