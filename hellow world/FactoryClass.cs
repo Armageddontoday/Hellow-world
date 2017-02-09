@@ -8,26 +8,34 @@ namespace HellowWorld
 {
     public class TaskFactory
     {        
-        private Random _random;
-        private IMathOperationsFactory[] _mathOperationsFactories;
+        private Random _random;       
+        private List<Type> _mathOperationFactoryTypes = new List<Type>();
 
         public TaskFactory()
         {
             _random = new Random();
-            _mathOperationsFactories = new IMathOperationsFactory[]
-             {
-                new AddFactory(),
-                new SubstractFactory(),
-                new MultiplicateFactory(),
-                new DivideFactory(),
-                new PowerFactory()
-             };
+
+            var domain = AppDomain.CurrentDomain;           
+            var assemblies = domain.GetAssemblies();            
+            var types = new List<Type>();
+            foreach (var assembly in assemblies)
+            {
+                types.AddRange(assembly.GetTypes());
+            }            
+            var targetInterface = typeof(IMathOperationsFactory);            
+            foreach (var type in types)
+            {
+                if (targetInterface.IsAssignableFrom(type) && type.IsClass)
+                {
+                    _mathOperationFactoryTypes.Add(type);                    
+                }
+            }            
         }
     
         public Task Create(Task previousTask)
         {
-            IMathOperationsFactory _randomMathOp = _mathOperationsFactories[_random.Next(0, 5)];
-            return new Task(_random.Next(1, 10), _random.Next(1, 10), _randomMathOp.Create(), previousTask);
+            var mathOperationFactory = (IMathOperationsFactory)Activator.CreateInstance(_mathOperationFactoryTypes[_random.Next(0, _mathOperationFactoryTypes.Count)]);            
+            return new Task(_random.Next(1, 10), _random.Next(1, 10), mathOperationFactory.Create(), previousTask);
         }
     }
 
@@ -111,6 +119,7 @@ namespace HellowWorld
             return "^";
         }
     }
+    
 
     public interface IMathOperationsFactory
     {
@@ -150,5 +159,5 @@ namespace HellowWorld
         {
             return new PowerMathOperation();
         }
-    }
+    }    
 }
